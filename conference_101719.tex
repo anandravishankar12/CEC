@@ -1,0 +1,668 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{lipsum}
+\usepackage{algorithm}
+\usepackage{textcomp}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsmath,amsfonts}
+\usepackage{array,booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{stackrel}
+\usepackage{breqn}
+\newtheorem{definition}{Definition}[section]    %% this does it
+\newtheorem{theorem}{Theorem}
+% \usepackage{isomath}
+\usepackage{mathtools}
+% http://ctan.org/pkg/amsmath
+% \newcommand\sufr[3][0pt]{$\rule{0pt}{\dimexpr#1+1.4ex\relax}^\frac{#2}{#3}$}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\newcommand\sufr[3][0pt]{$\rule{0pt}{\dimexpr#1+1.4ex\relax}^\frac{#2}{#3}$}    
+\begin{document}
+
+\title{Democratic Algorithm (DA):  \\}
+
+% \author{\IEEEauthorblockN{1\textsuperscript{st} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{2\textsuperscript{nd} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{3\textsuperscript{rd} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{4\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{5\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% \and
+% \IEEEauthorblockN{6\textsuperscript{th} Given Name Surname}
+% \IEEEauthorblockA{\textit{dept. name of organization (of Aff.)} \\
+% \textit{name of organization (of Aff.)}\\
+% City, Country \\
+% email address or ORCID}
+% }
+
+\maketitle
+
+\begin{abstract}
+Computational intelligence has produced nature-inspired algorithms as the new and popular problem-solving toolset in Multi-Objective Optimization Problems (MOOPs). In this paper, we present Democratic Algorithm (DA), a social-construct-based algorithm which is heavily inspired by hierarchical evolutionary algorithms and cultural algorithms derived from real-life based social establishments. Each candidate in the swarm takes part in the search process and contends for the position of the leader. Additional enhancements such as dynamism and memory retention capabilities boost the performance of DA. A comprehensive study is conducted with 18 benchmark functions to act as a proof-of-concept and lay the groundwork for future works. The results, so obtained, cement the competence of DA as it outperforms other algorithms in multiple unimodal and multimodal landscapes.
+% diverse fields such as soft computing, functional optimization, data science and machine learning. These algorithms can be further sub-divided, with swarm intelligence, physics-inspired, social, evolutionary algorithms a few noteworthy. In this paper we present Democratic Algorithm (DA) , a social-construct based algorithm heavily inspired from hierarchy swarm intelligence and real life social establishments. Our proposal extends the existing methodology for hierarchical structures by framing experience into a viable component for future applications. A comprehensive study is conducted with 16 benchmark functions and real-life data to cement the competence of the algorithm with DA providing a markup of 2-7.4X of convergence rate. 
+\end{abstract}
+
+\begin{IEEEkeywords}
+Optimization, Swarm intelligence, Democratic Algorithm, Memoization, Dynamic Structure
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+\subsection{Generalized Optimization}
+Optimization lies at the core of a multitude of problems ranging from financial analysis to the medical research. The parent field of optimization branches out into other sub-fields including, but not restricted to, non-linear programming, optimal control theory, dynamic programming, infinite-dimensional optimization and convex programming. In general, optimization problems are solved with an eye out for either minimizing or maximizing cost function(s), as presented                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          . The history of solving optimization has been graced by scholars such as Fermat and Gauss, who introduced novel methods of solving generalized optimization problems. The well-deserved attention attracted by this field can be attributed to both, the theoretical and algorithmic section as well as its universal practical application-based front.
+
+Optimization problems can be categorized in a multitude of ways, with the most general mode being, division based on the number of independent non-conflicting objective functions; Single Objective Optimzation Problems (SOOPs) and Multi-Objective Optimzation Problems (MOOPs). In this paper, optimization problems are considered without any regard to their classification, unless specified, as class conversion can be performed by either a preference-based approach or a divide-and-conquer technique. For example, MOOPs can be decomposed into multiple SOOPs under specified constraints and likewise SOOPs can be grouped into a collective MOOP by assigning priorities. 
+% Optimization lies at the very core of the majority of the prxzaqoblems ranging from machine learning to business planning. The level of importance awarded to optimization is due to the limited computational resources at hand. To compensate for the lack of resources, smarter algorithms are developed on an almost daily basis. These algorithms are capable of working efficiently in a constrained environment. 
+
+
+\subsection{Approaches to Solving Optimization Problems}
+
+Broadly speaking, a solution for a given optimization problem can be obtained in a variety of ways. The two main tracks for solving an optimization problem are the use of traditional methods and application of evolutionary algorithms. 
+
+\begin{itemize}
+\item Tradional methods: These techniques usually convert a MOOP into a set of SOOPs with the help of statistical tools. The optimization problem is then solved by following a set of deterministic transition rules iteratively, parameterized by multiple variables. The sheer simplicity of these algorithms make them appealing to the hoi-polloi. However, a lack of convergence guarentee, sub-optimal problem-algorithm mapping, sensitivity with respect to user parameters and an absense of inherent parallelism, contributed to the emergence of more efficient paths. Table $\ref{tab1}$ summarizes some of the infamous methods devised and utilized till date. 
+
+\begin{table*}
+\caption{\textsc{Classical Solving Methods}}
+\label{tab1}
+\centering
+\scalebox{0.9}
+{
+\begin{tabular}{| c | c | c | c |}
+\hline
+\textbf{Subclass} & \textbf{Optimization Equation} & \textbf{Advantages} & \textbf{Disvantages}\\
+\hline
+ &&&\\
+ Weighting Method \cite{arora} & $F\textsubscript{m}(x) =  \sum_{m=1}^{M}w\textsubscript{m}f\textsubscript{m}(x)$ & Simple, Intuitive & No constraints on weights, Not optimal  \\
+ &&&for nonconvex problems, Interactive\\
+\hline
+&&&\\
+ $\epsilon$-Constraint Method \cite{cooper}& $F\textsubscript{l}(x)$ w.r.t $F\textsubscript{m}(x) \leq \epsilon\textsubscript{m}$ & Ensures Pareto optimality ,  & Not scalable, Range requirement,\\
+   &  & and uniqueness & Interactive \\
+ &&&\\
+ \hline 
+ Neutral Compromise Solution & $\frac{F\textsubscript{m}(x) - ((z\textsubscript{i}\textsuperscript{*} + z\textsubscript{i}\textsuperscript{nad})/2)}{z\textsubscript{i}\textsuperscript{nad} - z\textsubscript{i}\textsuperscript{*}}$ & Approximate Solution, Rapid Process  & Weakly Pareto, Utopian and  \\
+  &  &  & Nadir solution required \\
+\hline
+ Weighted Metrics \cite{ryu}& $(\sum_{m=1}^{M}w\textsubscript{m}|f\textsubscript{m}(x) - z\textsubscript{m}\textsuperscript{*}|\textsuperscript{p})\textsuperscript{\sufr{1}{p}}$ & Smaller feasible region & Nondifferentiable in some cases, \\
+  &  &  & Convexity is required\\
+ \hline
+ &&&\\
+ Value Function Method \cite{sinha}& $\mathbb{U}(F(x))$ & Excellent results when & Mandatory and Over simplified\\
+   &  & mathematical representation is provided & mapping\\
+ &&&\\
+ \hline
+\end{tabular}
+}
+\end{table*}
+
+\item Evolutionary Algorithms (EA) : These algorithms attempt to imitate and approximate the behaviour exhibited by natural entities. The use of multiple search agents reinforced by knowledge propogated through multiple generations, provide assurance of the algorithm's convergence. Moreover, stochastic operators are utilized, instead of deterministic operators, in order to train the algorithm on a general optimization problem. Information exchange and retrival through operations such as mutation and selection, simulate exploitation and exploration, resulting in an Pareto optimal solution set. Table $\ref{tab2}$ encapsulates the prominent algorithms used in this track.  
+
+\begin{table*}
+
+\caption{\textsc{Evolutionary Methods}}
+\label{tab2}
+\centering
+% \scalebox{0.9}
+{
+\begin{tabular}{| c | c | c |}
+\hline
+\textbf{Subclass}&\textbf{Advantages}&\textbf{Disadvantages}\\
+\hline
+Preference relation \cite{kim}&Dominant Pareto guarentee&Required reference point\\
+\hline
+Light Beam Method \cite{an}&Optimal distance crowding&Reference direction threshold\\
+\hline
+Imprecise value function \cite{lim}&Solution based ranking&Dominant solutions\\
+\hline
+Biased Crowding&Desired trade-off&Crowding of solutions\\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+\end{itemize}
+
+\subsection{A Dynammic Programming Extension}
+
+Dynamic Programming (DP) is a general programming technique which follows a divide-and-conquer stratergy and aims to find an optimal solution for each of the sub-problems. EAs require a proper representational space defined by the interactions between the possible soltuions with the search space and the effect genetic operators have on the candidate solutions. One possible representation might provide EAs a framework to tackle optimization problems through a dynamic programming outlook. The purpose of providing a DP perspective is to prove that problems which are solvable in polynomial or pseudo-polynomial time by a DP model, can be solved by an EA in the specified time complexity.  
+
+
+\section{Notations}
+
+This section briefly describes the notations used for describing and discussing the different branches of DA. Relevant tables have been included to summarize the variables utilized in the particular sub-field.   
+
+\subsection{For Optimization}
+
+{\scriptsize
+\begin{align}
+\label{eqn:1}
+Optimize:f\textsubscript{m}(x)& &  m = 1,2\dots,M \\
+constraints:g\textsubscript{j}(x) > 0& & j=1,2\dots,J \nonumber\\
+h\textsubscript{k}(x) = 0& & k=1,2\dots,K \nonumber\\
+x\textsubscript{i}\textsuperscript{L} \le x\textsubscript{i} \le x\textsubscript{i}\textsuperscript{U} && i = 1,2\dots,n.\nonumber 
+\end{align}
+}%
+Equation $\ref{eqn:1}$ describes a general optimization problem consisting of $\textit{M}$ single-objective functions having $\textit{K}$ equality bounds and $\textit{J}$ inequality bounds. The $\textit{n}$ input vector components $\textit{x\textsubscript{i}}$ are also bounded within a lower $\textit{x\textsubscript{i}\textsuperscript{L}}$ and upper $\textit{x\textsubscript{i}\textsuperscript{U}}$ bound.
+
+Solution analysis must be conducted with respect to the optimization problem to authenticate their validity as in some cases the ideal solution is non-existent. 
+
+% These cases arise due a wide variety of reasons e.g, logically inconsistency of the solutions or restrictions due to the conflicting nature of the sub-functions. 
+
+In order to compare the performance of diffferent algorithms on test functions, the concept of dominance is introduced initially, following which Pareto optimality is discussed. Consider algorithms A and B, each producing solution $x\textsubscript{A}$ and $x\textsubscript{B}$ respectively. Solution $x\textsubscript{A}$ is said to weakly-dominate over solution $x\textsubscript{B}$ for $\textit{M}$ test functions, $\textit{iff}$ the following conditions are met:
+
+% \begin{itemize}
+% \item Solution $x\textsubscript{A}$ is no worse than $x\textsubscript{A}$
+% \end{itemize}
+
+\begin{itemize}
+\item $x\textsubscript{A}$ is no worse than $x\textsubscript{B}$ in all $f\textsubscript{i}$, $\forall i \in [1,2,\dots,M]$ test functions.
+\item $x\textsubscript{A}$ is strictly better than than $x\textsubscript{B}$ in at least one test function $f\textsubscript{i}$, for $i \in [1,2,\dots,M]$.
+\end{itemize}
+
+On the other hand, $x\textsubscript{A}$ is said to strongly-dominate $x\textsubscript{B}$ for $\textit{M}$ test functions, $\textit{iff}$ $x\textsubscript{A}$ is strictly better than $x\textsubscript{A}$ for all $\textit{M}$ test functions. 
+
+Now, let us consider the following case; $x\textsubscript{A}$ dominates $x\textsubscript{B}$ on $f\textsubscript{i}$ and $x\textsubscript{B}$ dominates $x\textsubscript{A}$ on $f\textsubscript{j}$. A set of such solutions are said to be non-dominant with respect to each other and any solution outside this set would be dominated by at least one solution in this set. This subset of non-dominated solutions from the entire set of possible solutions is called a Globally Pareto-optimal set or simply a Pareto-optimal set. The purpose of introducing the optimization-relevant notation in this text is to provide a relative order of dominance among multiple algorithms. Further discussions on the choice of the algorithm can be made by incorporating problem-specific information.  
+
+\subsection{Dynamic Programming}
+
+Let $\textit{X(t)}$ represent the soltuion state at time $\textit{t}$ and $\textit{U(t,X(t))}$ be the control policy associated to state $\textit{X(t)}$. Equation $\ref{eq2}$ represents the state definition at initial time $\textit{t\textsubscript{0}}$ and at arbritary time $\textit{t} \in [t\textsubscript{0}, t\textsubscript{1}, \dots, T]$, as a function of its preceding state value and control policy. The state at time $\textit{t}$+1 is stated as a function of the state at time $\textit{t}$ and its corresponding policy $\textit{U(t, X(t))}$.
+
+{\scriptsize
+\begin{align}
+X(t\textsubscript{0}) &= x\textsubscript{0} \nonumber\\
+X(t+1) &= f(t, X(t), U(t, X(t)))    
+\label{eq2}
+\end{align}
+}
+
+Note that reduced notations have been used from this point onwards. Refer to Table $\ref{tab3}$ for the corresponding mapping. The control policy updation is performed as per the score of a cost function $\textit{J\textsubscript{t,x}(u)}$ and is described in $\ref{eq3}$. 
+
+% $\textit{J\textsubscript{t,x}(u)}$ is also called a performance index and can be varied as per the user constraints.  
+
+{\scriptsize
+\begin{align}
+J\textsubscript{\textit{t,x}}(u) = \sum_{\textit{t\textsubscript{0}}}^{T-1} F(t, x, u) + \psi(x + W(t))
+\label{eq3}
+\end{align}
+}
+
+The cost function defined in Equation $\ref{eq3}$ forms a part of a stochastic optimal control problem, parameterized by reward function $\psi(x)$, in which randomness being introduced throughout the stages in the form of noise $\textit{W(t)}$. The most generalized and effective technique for solving any optimization problem, as per DP, is to divide the problem into multiple sub-problems and finding optimal solutions to those sub-problems as shown in Equation $\ref{eq4}$. 
+
+{\scriptsize
+\begin{equation}
+  J\textsubscript{\textit{t,x}}(u) =
+    \begin{cases}
+      j\textsubscript{\textit{t,x,1}}(u)\\
+      j\textsubscript{\textit{t,x,2}}(u)\\
+      .\\
+      .\\
+      j\textsubscript{\textit{t,x,n}}(u)\\
+    \end{cases}       
+    \label{eq4}
+\end{equation}
+}
+
+The control variable $\textit{u}$ also has an element of randomness as it is selected from a set of Markov control policies. Moreover, only an expected value of the functional result of a given policy is achieved. This expected value is computed as a probability measure prompted by the transitions underwent and their corresponding state densities. 
+
+{\scriptsize
+\begin{align}
+J\textsubscript{\textit{t,x}}(u) = E(\sum_{\textit{t\textsubscript{0}}}^{T-1} F(t, x, u) + \psi(x + W(t)))
+\label{eq5}
+\end{align}
+}
+
+\begin{table*}[!t]
+\caption{\textsc{Reduced Parameter Listings}}
+\label{tab3}
+\centering
+\scalebox{0.9}
+{
+\begin{tabular}{ c  c  c  c }
+
+\textbf{Symbol} & \textbf{Variable} & \textbf{Symbol} & \textbf{Variable}\\
+\hline
+\hline
+{t$\textsubscript{0}$}&{Initial Time}&{x = X(t)}&{Solution State at time t}\\
+{T}&{Final Time}&{u = U(t,X(t))}&{Control Policy parameterized at state x}\\
+{t}&{Time instant $\in$ [t$\textsubscript{0}, \dots$, T]}&{$\psi(x)$}&{Reward Function at time t}\\
+{W(t)}&{Gaussian Noise}&{J$\textsubscript{\textit{t,x}}(u)$}&{Cost Function}\\
+\end{tabular}
+}
+\end{table*}
+
+DP minimizes/maximizes $j\textsubscript{\textit{t,x,i}}(u)$ $\forall$ i $\in [1, 2, \dots, n]$, which optimizes the overall cost $J\textsubscript{\textit{t,x}}(u)$. The parameter set corresponding to the optimal cost are congruous with the target solution. 
+
+\subsection{Evolutionary Algorithms}
+
+EAs utilize an analytic approach guided by operations like mutation and crossover. Endogenous parameters like mutation rate and recombination rate dictate the overall behaviour of any evolutionary algorithm. The general parameters are specified in Table $\ref{tab4}$. 
+
+\begin{table*}[!t]
+\caption{\textsc{Evolutionary Parameter Listings}}
+\label{tab4}
+\centering
+\scalebox{0.9}
+{
+\begin{tabular}{ c  c  c  c }
+
+\textbf{Symbol} & \textbf{Variable} & \textbf{Symbol} & \textbf{Variable}\\
+\hline
+\hline
+{$\mu$}&{Evolutionary Stratergy}&{S}&{Initial Seeding}\\
+{$\mathcal{R\textsubscript{r}}$}&{Recombination Rate}&{$\mathcal{R\textsubscript{o}}$}&{Recombination Operator}\\
+{$\mathcal{M\textsubscript{r}}$}&{Mutation Rate}&{$\mathcal{M\textsubscript{o}}$}&{Mutation Operator}\\
+{$\mathcal{C\textsubscript{r}}$}&{Crossover Rate}&{$\mathcal{C\textsubscript{o}}$}&{Crossover Operator}\\
+\end{tabular}
+}
+\end{table*}
+
+% As the name suggests, Multi-Objective Optimization Problems (MOOPs) require simultaneous solutions to multiple single-objective optimization problems each with its own set of constraints. 
+
+% {\scriptsize
+% \begin{align}
+% \label{eqn:1}
+% Maximize/Minimize:f\textsubscript{m}(x)& &  m = 1,2\dots,M \\
+% constraints:g\textsubscript{j}(x) \ge 0& & j=1,2\dots,J \nonumber\\
+% h\textsubscript{k}(x) = 0& & k=1,2\dots,K \nonumber\\
+% x\textsubscript{i}\textsuperscript{L} \le x\textsubscript{i} \le x\textsubscript{i}\textsuperscript{U} && i = 1,2\dots,n.\nonumber 
+% \end{align}
+% }%
+% Equation $\ref{eqn:1}$ describes a general MOOP consisting of $\textit{M}$ single-objective functions having $\textit{K}$ equality bounds and $\textit{J}$ inequality bounds \cite{chankong}. The $\textit{n}$ input vector components $\textit{x\textsubscript{i}}$ are also bounded within a lower $\textit{x\textsubscript{i}\textsuperscript{L}}$ and upper $\textit{x\textsubscript{i}\textsuperscript{U}}$ bound.
+
+% Usually MOOPs are solved by decomposing them into multiple single-objective optimization problems \cite{liu}. However, the striking difference in this method and directly solving a MOOP lies in the decision space. For a pure MOOP, the multi-dimensional decision space is accompanied with an objective space $\textit{Z}$. For each solution $\textit{x}$, there is a point in the objective space denoted by $\textit{z} = (\textit{z\textsubscript{1}}, \textit{z\textsubscript{2}}, \textit{z\textsubscript{3}}, \dots, \textit{z\textsubscript{M}})$. Hence pure MOOPs optimize a vector \cite{Deb} whereas multiple single-objective optimization problems optimize singular variables. 
+
+% \subsection{Dominance and Pareto Optimality}
+% 
+% Majority of MOOPs revolve around the idea of dominance as conflicts arise between multiple solutions. Consider a MOOP with $\textit{M}$ sub-optimzation problems leading to $\textit{N}$ solutions. For any solution $\textit{i} \in \textit{N}$ to dominate solution $\textit{j} \in \textit{N}$, there are two criteria which must be met.
+% 
+% \begin{itemize}
+% \item The solution $\textit{i}$ must be no worse than $\textit{j}$ in all sub-optimization problems $\textit{f\textsubscript{x}}$ for all $\textit{x} = 1,2 \dots, \textit{M}$
+% \item The solution $\textit{i}$ is strictly better than $\textit{j}$ in at least one sub-optimization problem $\textit{f\textsubscript{x}}$ for all $\textit{x} = 1,2 \dots, \textit{M}$
+% \end{itemize}
+% 
+% This concept, although intuitive, allows for a concrete definition of a solution being "better" than another and assists in searching for the non-dominated solutions. However, an interesting case appears between two solutions, when $\textit{i}$ is better than $\textit{j}$ in one sub-problem where $\textit{j}$ is better than $\textit{i}$ in another. After performing a pairwise comparison and eliminating all the singularly dominated solutions, we have a set of non-dominated solutions called the non-dominated set. Any solution inside this set is better than any solution outside the set. 
+% 
+% When such a space constitutes the entire space of solutions, the set is called a Global Pareto-Optimal set. By introducing a neighboring constant which allows for some leverage, a Global Pareto-Optimal solution can be converted to a Local Pareto-Optimal solution. Therefore the initial MOOP is now transformed into a task of finding multiple Pareto-Optimal solutions with good diversity in decision variable values. The following section describes the various methods by which MOOPs can be solved. 
+% 
+% 
+% \section{Solving MOOPs}
+% 
+% In this section, we provide a brief overview of methods to solve MOOPs and obtain Pareto-optimal solutions. Historically, these methods can be classified into classical and evolutionary techniques \cite{vikhar} \cite{swarm}. Additional information about these techniques and their sub-classifications are provided in Table $\ref{tab1}$ and $\ref{tab2}$. Every algorithm is set back in one way or the other due to the No Free Lunch Theorem. Our goal in this paper does not create an algorithm which works perfectly for all problems, but to put forth a novel construct which mitigates the drawbacks of its predecessors. 
+
+
+
+
+% A common drawback pattern encountered in the listed techniques is the dominance factor. The Light Beam method works towards being independent of this factor by leveraging prior knowledge of the reference direction, whereas the Imprecision value function method takes in a ranking system but created dominant solutions. In this paper, we propose a solution to this conundrum deploying multiple candidates in a dynamically structured format into the solution landscape instead of a static master-follower format. As a result of the increased competition, the candidate solutions have added incentive to capture the top department. 
+
+\section{Democratic Algorithm (DA)}
+
+In this section, we present a novel social-construct based algorithm heavily inspired by swarm intelligence and real life social establishments. To find the optimal solution, each candidate aims to transcend to the next population with the help of the previous generations.  
+
+\subsection{Inspiration}
+The term "Democracy" was coined in Athens, and translates to "Strength of the People". The two main characteristics borrowed from the social ideology for this algorithm are as follows.
+
+\begin{itemize}
+\item Equal opportunity for any candidate to ascend and claim the global decision making spot
+\item Proportional influence on the decision making process.
+
+\end{itemize}
+
+We follow an extended social hierarchical structure to incorporate some fundamentals of SI into this algorithm. The initial population set is divided into $N$ population sets $\alpha\textsubscript{i}$ for $i \in N$. The case for $N=3$ is shown in figure $\ref{struct}$.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[height=5cm]{prop2.jpg}
+\caption{Structure of DA}
+\label{struct}
+\end{figure}
+
+The division of populations is based on the relative scores obtained against the set fitness function. Candidates belonging to the highest population set dictate the overall global optima searching process whilst guiding and taking advice from the lower population sets. Following initialization, there are two main phases involved in this algorithm.
+\begin{itemize}
+\item Exploitation Phase
+\item Exploration Phase
+\end{itemize}
+
+In the following subsections, models of the social hierarchy and the phases are explained, followed by outlining of the entire algorithm.  
+
+\subsection{Exploitation Phase}
+
+This phase has the sole purpose of finding the optimal solution. Candidates belonging to the popolution corresponding to the decision-making position have the paramount responsibility for finding the solution. The designated survivors act as advisers which help maintain the social structure and prevent the search process from falling into local optima. To improve the throughput of DA, a dynamic extension, in the form of memoization table, is introduced in the exploitation phase. The solutions obtained by the premier population are continuously stored in the table for any future reference. The updation of the current position is done based on a weighted sum of the current position of all the populations. Based on the difference between the solution provided and the true solution, the leading population's reward score is either incremented or decremented by 1. The algorithm is depicted in Algorithm $\ref{alg:gs}$. 
+
+\begin{algorithm}[!t]
+\footnotesize
+\caption{Exploitation Phase}
+\label{alg:gs}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} Population size of population $\alpha\textsubscript{top}$: $\textit{n}$, Set of stopping criteria $\lambda\textsubscript{i}$, fitness function $\textit{f}$
+\STATE Create $\textit{n}$ candidate solutions $\textit{S\textsubscript{i}}$, $\textit{i}$ $\in [1, n]$  
+\FOR{Each candidate $\textit{S\textsubscript{i}}$} 
+\STATE Apply $\textit{f}$ on $\textit{s\textsubscript{i}}$
+\ENDFOR
+\STATE Establish group dynamics based on fitness hierarchy
+\WHILE{any of $\lambda\textsubscript{i}$ are not met}
+\IF{predicted fitness is acceptable}
+\STATE Re-emphasize recombination through $\mathcal{R\textsubscript{r}}$ and $\mathcal{R\textsubscript{o}}$
+\ELSE
+\STATE Re-emphasize mutation through $\mathcal{M\textsubscript{r}}$ and $\mathcal{M\textsubscript{o}}$
+\ENDIF
+\ENDWHILE
+\STATE Predicted solution corresponds to global optimum
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Exploration Phase}
+
+After a set period $\textit{T}$ if the total reward score does not exceed a threshold $\lambda$ then the leading population is replaced by the popluation inferior to it. If $\lambda$ is exceeded, then the next problem set is loaded with the current configuration.
+
+The entire process of the voting season is displayed in Algorithm $\ref{alg:da}$.
+
+\begin{algorithm}[!t]
+\footnotesize
+\caption{Exploration Phase}
+\label{alg:da}
+\begin{algorithmic}[1]
+\STATE \textbf{Input:} Population size $\textit{n}$, random vector set $\vec{r\textsubscript{1,j}}$, $\vec{r\textsubscript{2,j}} \in$ [0,1], weight vector $\vec{w}$, initial estimate of global optimum $\textit{X\textsubscript{g}}$, time period $\textit{T}$, threshold $\lambda$, fitness function $\textit{f}$, coefficient vector sets $\vec{\gamma\textsubscript{j}}$, $\vec{\beta\textsubscript{j}}$ and $\vec{a\textsubscript{j}}$
+\STATE Set $\textit{t}$ = 0
+\STATE Initialize vector set $\vec{\gamma\textsubscript{j}}$ = 2$\vec{a} \cdot \vec{r\textsubscript{1}}$ - $\vec{a}$
+\STATE Initialize vector set $\vec{\beta\textsubscript{j}}$ = 2$\vec{r\textsubscript{2}}$
+% and $\vec{a\textsubscript{j}}$
+\IF {Table $\textit{H}$ exists with current function problem}
+\STATE Refer to table $\textit{H}$ for solution
+\ELSE
+\STATE Create table $\textit{H}$ mapping input to corresponding output and apply memoization
+\STATE Create table $\textit{R}$ to store the performance of each population set
+\FOR{i $\in$ [1,n]}  
+\STATE Generate population results $\textit{X\textsubscript{i}(t)}$ at instance $\textit{t}$
+\STATE Evaluate each individual against the fitness function
+\ENDFOR
+\STATE Assign $\alpha\textsubscript{i}$ $\forall$ $i$ $\in$ $N$   populations as per the score against the fitness function. 
+\STATE Evaluate $\vec{D\textsubscript{j}} = |\vec{\beta} \cdot \vec{X\textsubscript{g}}(t) - \vec{X\textsubscript{j}}(t)|$
+\WHILE{t $<$ T}
+\FOR{Each individual $\textit{X\textsubscript{i,j}(t)}$ in each population $\textit{j}$}
+\STATE Update $\textit{X\textsubscript{i,j}(t)}$ := $\textit{X\textsubscript{j}(t)}$ - $\vec{\alpha}$($\vec{D\textsubscript{j}}$)
+\STATE $\textit{X\textsubscript{i,j}(t+1)}$ = $\frac{\vec{w} \cdot \textit{X\textsubscript{i,j}(t)}}{N}$
+\ENDFOR
+\STATE Check fitness of $\textit{X\textsubscript{top}}$ against $\textit{f}$
+\IF{Fitness score is acceptable}
+\STATE Increase score of $\textit{X\textsubscript{top}}$ in $\textit{R\textsubscript{top}}$ by 1
+\ELSE
+\STATE Decrease score of $\textit{X\textsubscript{top}}$ in $\textit{R\textsubscript{top}}$ by 1
+\ENDIF
+\ENDWHILE
+\STATE At $\textit{t}$ = $\textit{T}$, check score of highest population set
+\IF{$\textit{score\textsubscript{top}} \geq \lambda$}
+\STATE Continue
+\ELSE
+\STATE Replace $\textit{X\textsubscript{top}}$ with $\textit{X\textsubscript{top-1}}$
+\ENDIF
+\STATE Update $\vec{a}$ := 2($\frac{T-t}{T}$)
+\STATE Update $\vec{\gamma}$ and $\vec{\beta}$ accordingly
+\STATE $\textit{X\textsubscript{top}}$ represent required set of optimal solutions
+\STATE Add corresponding function and solution to $\textit{H}$ for future reference
+\ENDIF
+\end{algorithmic}
+\end{algorithm}
+
+\subsection{Cultural Algorithm}
+
+As stated earlier, DA has its core ideas derived from real-life social establishments and hence falls under the umbrella of Cultural Algorithms (CA). The knowledge-intensive framework of DA extracts the idea of an auto-adjusting cultural system and produces solutions for an extended set of problems. As displayed in Figure $\ref{struct}$ the social fabric of interactions between the population and a predefined belief space, is the leading force of a self-coorecting system. The population consists of potential solutions to the problem presented and the belief space acts as a repository of knowledge acquired by the system so far, along with a compendium vector pointing to the target solution. The memoization table $H$ specified in Algorithm $\ref{alg:da}$ is stored in the belief space. Note that CA must note only simulate the strengthening of the fabric, but also be capable of replacing the bond as and when the results are less than satisfactory. In the case of DA, sub-populations are set in place for the succession if and when the replacement criterion is satisfied. 
+
+\subsection{Key Points}
+
+Based on the algorithmic design, the following observations can be made:
+\begin{itemize}
+\item The updation process occurs at an individual and at a set level to save the best solutions obtained so far
+\item The parameters $\vec{\gamma}$ and $\vec{\beta}$ assist the solutions to have higher dimensionality
+\item Due to the updation and introduction of a memory element in the form of a memoization table, the problems functions will saturate at one particular population
+\item The exploitation phase provides weighted rights to each candidate in each popluation. The weights are assigned based on the individual's fitness which in turn is dependent on their population's position in the hierarchy 
+\item As the population rank increases, the number of individual candidate in the population decreases to promote elitism. This would ensure survival of the best solutions in future problems. 
+\item As the population rank decreases, the number of individual candidate in the population increase to promote diversity. This would open up new avenues to explore and possibly increase chances of finding the gobal optimum.  
+\end{itemize}
+
+\begin{table*}
+\caption{\textsc{Benchmark Functions}}
+\label{tab:1}
+\centering
+\scalebox{0.9}
+{
+\begin{tabular}{| >{\arraybackslash}m{0.88in} | c | c | >{\arraybackslash}m{0.4in} | c | >{\arraybackslash}m{1in} | c |}
+\hline
+Function & ID & Formula & Modality & Range & Minimum Value & Popoulation Set \\
+\hline
+Matyas & F1 & $0.26(x\textsubscript{2} + y\textsubscript{2}) - 0.48xy$ & Uni & [-10,10] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{i}$\\
+Booth & F2 & $(x + 2y - 7)\textsuperscript{2} + (2x + y - 5)\textsuperscript{2}$ & Uni & [-10,10] & 0 at $x\textsuperscript{*}$ = (1,3) & $\alpha\textsubscript{i}$\\
+Bohachevsky & F3 & $x\textsuperscript{2} + 2y\textsuperscript{2} -0.3cos(3\pi x)-0.4cos(4\pi y)+0.7$ & Uni & [-100,100] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{i}$\\
+Gramacy and Lee & F4 & $\frac{sin(10\pi x)}{2x} + (x-1)\textsuperscript{4}$ & Uni & [-0.5,2.5] & -0.86 at $x\textsuperscript{*}$ = (0.54) & $\alpha\textsubscript{i}$\\
+Leon & F5 & $100(y-x\textsuperscript{3})\textsuperscript{2}$ + $(1-x)\textsuperscript{2}$ & Uni & [-10,10] & 0 at $x\textsuperscript{*}$ = (1,1) & $\alpha\textsubscript{j}$\\
+Ackley & F6 & $-20 exp(-0.2 \sqrt{\frac{1}{n} \sum_{i=1}^n x_i^2}) +$ e + & Multi & [-32,32] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{i}$\\
+& &20 - $exp(\frac{1}{n} \sum_{i=1}^n cos(2\pi x_i))$&&&&\\
+Bartels & F7 & $|x\textsuperscript{2} + y\textsuperscript{2} + xy| + |sin(x)| + |cos(y)|$ & Multi & [-500,500], [-500,500] & 1 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{i}$\\
+Branin & F8 & $a(x\textsubscript{2} - bx\textsubscript{1}\textsuperscript{2} + cx\textsubscript{1} - r)\textsuperscript{2}$ + $s(1-t)cos(x\textsubscript{1})$ + s & Multi & [-5,10], [0,15] & 0.39 at $x\textsuperscript{*}$ = (-$\pi$, 12.275) & $\alpha\textsubscript{j}$\\
+Egg Crate & F9 & $x\textsuperscript{2}$ + $y\textsuperscript{2}$ + $25(sin\textsuperscript{2}(x) + cos\textsuperscript{2}(x))$ & Multi & [-5,5] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{j}$\\
+Qing & F10 & $\sum_{i=1}^{n}(x^2-i)^2$ & Multi & [-500,500] & 0 at $x\textsuperscript{*}$ = ($\pm\sqrt{i}$) & $\alpha\textsubscript{i}$\\
+Rastrigin & F11 & $10n + \sum_{i=1}^{n}(x_i^2 - 10cos(2\pi x_i))$ & Multi & [-5.12,5.12], [-500,500] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{k}$\\
+Rosenbrock & F12 & $\sum_{i=1}^{n}[b (x_{i+1} - x_i^2)^ 2 + (a - x_i)^2]$ & Multi & [-5.12,5.12], [-5,10] & 0 at $x\textsuperscript{*}$ = (1) & $\alpha\textsubscript{k}$\\
+Bird & F13 & $sin(x)e\textsuperscript{(1-cos(y))\textsuperscript{2}}+cos(y)e\textsuperscript{(1-sin(x))\textsuperscript{2}}+(x-y)\textsuperscript{2}$ & Multi & [-2$\pi$, 2$\pi$] & -106.76 at $x\textsuperscript{*}$ = (4.70,3.15),(-1.58,-3.13) & $\alpha\textsubscript{i}$\\
+Powell Sum & F14 & $\sum_{i=1}^{n}|x_i|^{i+1}$ & Multi & [-1,1] & 0 at $x\textsuperscript{*}$ = 0 & $\alpha\textsubscript{i}$\\
+Schaffer & F15 & $0.5 + \frac{sin\textsuperscript{2}(x\textsuperscript{2}-y\textsuperscript{2})-0.5}{(1+0.001(x\textsuperscript{2}+x\textsuperscript{2}))\textsuperscript{2}}$ & Multi & [-100,100] & 0 at $x\textsuperscript{*}$ = (0,0) & $\alpha\textsubscript{j}$\\
+Shubert & F16 & $\prod_{i=1}^{n}{\left(\sum_{j=1}^5{ cos((j+1)x_i+j)}\right)}$ & Multi & [-10,10] & -186.7309  & $\alpha\textsubscript{i}$\\
+Happy Cat & F17 & $\left[\left(||\textbf{x}||^2 - n\right)^2\right]^\alpha + \frac{1}{n}\left(\frac{1}{2}||\textbf{x}||^2+\sum_{i=1}^{n}x_i\right)+\frac{1}{2}$ & Multi & [-2,2] & 0 at $x\textsuperscript{*}$ = (-1)  & $\alpha\textsubscript{i}$\\
+Alpine & F18 & $\prod_{i=1}^{n}\sqrt{x_i}sin(x_i)$ & Multi & [0,10] & 2.80 at $x\textsuperscript{*}$ = (7.91)  & $\alpha\textsubscript{j}$\\
+\hline
+\end{tabular}
+}
+\end{table*}
+
+\section{Proof of Concept}
+
+
+\subsection{Proof of Convergence}
+DA is one instance of Evolutionary Algorithms and follows a similar convergence proof with slight modifications as proposed by G. Rudolph and A. Agapie \cite{conv}. They related the choice of evolutionary operations to the positiveness of a variation kernel. If the transition probability from a set of chromosomes to any solution is non-zero positive, then the transition process of the operations have a positive variation kernel. Extending this across with a homogeneous Markov chain having a positive transition matrix, it has been proven the all Pareto-optimal solutions will be the global solution in finite time with probability one. To prove the stochastic convergence, we first need to define a measure for the mapping.
+
+\begin{theorem}
+If $A$ and $B$ are subsets of a finite population set $X$ the $d(A,B)$ = $|A \cup B| - |A \cap B|$ is a metric on the power set of $X$
+\end{theorem}
+
+\begin{proof}\renewcommand{\qedsymbol}{}
+Let $X$ = $\{X\textsuperscript{1}, X\textsuperscript{2} \dots, X\textsuperscript{n} \}$ be the candidates and $a\textsubscript{i}$ and $b\textsubscript{i}$ be the candidate and solution incidence vectors. \\
+{\scriptsize
+\begin{align*}
+d(A,B) &= \sum_{i=1}^{n}(a\textsubscript{i} + b\textsubscript{i} - 2a\textsubscript{i}b\textsubscript{i})\\
+ &= \sum_{i=1}^{n}[(1-b\textsubscript{i})a\textsubscript{i} + (1-a\textsubscript{i})b\textsubscript{i}]\\
+ &= \sum_{i=1}^{n}|a\textsubscript{i} - b\textsubscript{i}| = ||a - b||\textsubscript{1}
+\end{align*}
+}
+\end{proof}
+Therefore the Hamming Distance between the incidence vectors can act as a metric for mapping. A secondary measure utilized in the mapping is $\delta\textsubscript{B}(A)$ = $|A| - |A \cap B|$ which counts the number of candidates in set $A$ but not in set $B$. Stochastic convergence proof is discussed next. 
+
+\begin{theorem}
+Let $n\textsubscript{t}$ be the population of DA at time $t \geq 0$ and $F\textsubscript{t} = f(n\textsubscript{t})$ be the optimal mapping. DA is said to converge at probability 1 to the entire set if
+{\scriptsize
+\begin{equation*}
+d(F\textsubscript{t}, M\textsuperscript{*}) \rightarrow 0,  t \rightarrow \infty
+\end{equation*}
+}
+where convergence to set of minimal elements $\textit{M\textsuperscript{*}}$ occurs at probability 1 if 
+{\scriptsize
+\begin{equation*}
+\delta\textsubscript{M\textsuperscript{*}}(F\textsubscript{t}) \rightarrow 0\\
+\end{equation*}
+}
+with probability 1 as $\textit{t} \rightarrow \infty$
+\end{theorem}
+
+The implication of $d(F\textsubscript{t}, M\textsuperscript{*}) \rightarrow 0$ implies $\delta\textsubscript{M\textsuperscript{*}}(F\textsubscript{t}) \rightarrow 0$ extends to the worst case scenario of $n = M\textsuperscript{*}$. However, if a Markov Chain is maintained dynamically, $|M\textsuperscript{*}|=1$ and the limited population size will converge to a critical point. The rate of convergence is another important piece in this discussion. 
+
+\begin{theorem}
+Let $n\textsubscript{i,t}$, $F$, $GM$ and $\lambda$ be the population of the $i\textsuperscript{th}$ department of DA at time $t$, fitness function, rate of cross-over-mutation and threshold for the memory element respectively. The rate of population progression from department $i$ to $j$ for a given problem can be expressed as
+{\scriptsize
+\begin{equation*}
+\frac{d(Population\textsubscript{i $\rightarrow$ j})}{dt} \propto f(n\textsubscript{i,t}, \frac{1}{F}, GM, \lambda)
+\end{equation*}
+}
+\end{theorem}
+
+\begin{proof}\renewcommand{\qedsymbol}{}
+
+Consider $n\textsubscript{i,t}$ and $F$ as a combined quantity $Q(i,j,t)$. The distribution of $Q(i,j,t)$ will be binomial as the peak is achived with maximum population and highest fitness score. The probability of candidate $c$ at department $i$ to continue into department $j$ at time $t+1$ will be given by
+{\scriptsize
+\begin{equation*}
+P(j|i,t+1) =  {n\textsubscript{$i$,$t$} \choose n\textsubscript{$i$,$t$}} GM\textsuperscript{$n\textsubscript{$i$,$t$}$}
+\end{equation*}
+}
+
+
+
+Based on this distribution, diffusion equations with initial state $p$, relative frequency of candidate selection till current department $\mu$ and selection strength $s$ can be written as:
+{\scriptsize
+\begin{equation*}
+\frac{\partial \mu(p,t)}{\partial t} = \frac{p(1-p)}{2}\frac{\partial^2 \mu(p,t)}{\partial^2 p} + sp(1-p)\frac{\partial mu(p,t)}{\partial mu}
+\end{equation*}
+}
+Fixing this probability when $t$ $\rightarrow$ $\infty$ as
+{\scriptsize
+\begin{equation*}
+u(p) = \lim_{t \rightarrow \infty} {\partial(p,t)}
+\end{equation*}
+}
+We get the rate of transition of a candidate as a function of the proficiency over time $t$, $u(p)\textsuperscript{$t$}$.
+\end{proof}
+% From a mathematical point of view, both the structure and the search processes evolve over time with feedback. For each search, a lookup is conducted by candidate $\textit{c}$ in table $\textit{H}$. If not found, a solution $\textit{x\textsubscript{0}}$ is assumed as the initial point and the search of optimum solution $\textit{x\textsubscript{1}}$ begins. At the end of each expedition, the top department's performance is graded through a reward system. Based on the global performance overall a set runtime, either the department continues in power or gets replaced.
+
+\subsection{Proof of NP-Completeness for Population Formation}
+
+The populations $\alpha\textsubscript{i}$ $\forall$ $i \in N$ are divided based on their initial fitness value. Given a set of $\mathcal{T}$ tasks to be completed with $\mathcal{N}$ population sets, parameterized by penalty function $\textit{p}$, the population formation problem posists an optimal mapping between candidate solutions and every task with anadditional constraint that a solution can be assigned to only one task. In order to prove the NP-Completeness of the population problem we shall first place it in the NP space and then reduce a known NP-Complete problem to the population problem. 
+
+\begin{proof}\renewcommand{\qedsymbol}{}
+
+Let $\textit{X\textsubscript{n,t}}$ be a variable indicating the mapping from task $\textit{t}$ $\in$ $\mathcal{T}$ to candidate solution $\textit{n}$ $\in$ $\mathcal{N}$. 
+
+\[
+    \textit{X\textsubscript{n,t}}= 
+\begin{cases}
+    1,& \text{if } $\textit{n} -$>$ \textit{t}$\\
+    0,              & \text{otherwise}
+\end{cases}
+\]
+
+The problem can then be reduced to an optimization problem, as shown in Equation $\ref{eq6}$
+
+\begin{align}
+min \sum_{\textit{t} \in \mathcal{T}} \sum_{\textit{n} \in \mathcal{N}} \textit{p}(\textit{n,t}) \textit{X\textsubscript{n,t}} \label{eq6} \\
+\sum_{s \in n} \textit{X\textsubscript{n,t}} \geq 1, \forall s \in t, \forall t \in \mathcal{T} \nonumber\\ 
+\sum_{t \in T} \textit{X\textsubscript{n,t}} \leq 1, \forall n \in \mathcal{N} \nonumber
+\end{align}
+
+Consider the trivial case of cardinality $|$$\mathcal{T}$$|$ = 1 and $\textit{p}$($\textit{n,t}$) = 1 $\forall n \in \mathcal{N}$. This reduces Equation $\ref{eq6}$ to $\ref{eq7}$.
+
+\begin{align}
+min \sum_{\textit{n} \in \mathcal{N}} \textit{X\textsubscript{n,t}} \label{eq7} \\
+\sum_{s \in n} \textit{X\textsubscript{n,t}} \geq 1, \forall s \in t \nonumber\\ 
+\end{align}
+
+Equation $\ref{eq7}$ is the formulation of minimum set cover problem, which is proven to be NP-Complete. However, this does not prove the population formulation problem to be NP-Complete. We need to find a subset of $\textit{k}$ solutions which will complete task $\textit{t}$. Let $\textit{M\textsubscript{n,t}}$ be the mapping from solution $\textit{n} \in \textit{k}$ to task $\textit{t}$. We have to find a corresponding set $\textit{C} \subseteq \mathcal{N}$, such that $|$$\textit{C}$$|$ = $\textit{k}$ and $\cup$$\textsubscript{\textit{n}}$$\textsubscript{$\in$\textit{C}}$ $\textit{M\textsubscript{n}}$ = $\textit{M\textsubscript{t}}$. The length of the set $\textit{C}$ and the union check of set $\textit{C}$ can be verifed in polynomial time. Hence population problem is now in the NP set. 
+
+In the minimum set cover problem, we have a universal set $\textit{U}$ and a set of subsets $\textit{S\textsubscript{i}} \in \textit{S}$ such that $\textit{S\textsubscript{i}} \subseteq U$. We have to find at most $\textit{m}$ subsets from $\textit{S}$ called $\textit{C}$, $|$$\textit{C}$$|$ = $\textit{m}$ such that $\cup\textsubscript{S'$\in$C}$$\textit{S'}$ = $\textit{U}$. 
+
+By the mapping of $\textit{S\textsubscript{t}}$ to $\textit{U}$, $\textit{S\textsubscript{i}} \in \textit{S}$ to $\textit{n} \in \mathcal{N}$ and $\textit{k}$ to $\textit{m}$, the problems become equivalent. Hence the population formation problem is NP-Complete. As the next best alternative, the capabilities of EA have been utilized to form the population sets sub-optimally.  
+
+\end{proof}
+ 
+
+To sum up, DA starts with generating and evaluating a set of candidate solutions. The solutions are grouped according to their relative goodness of fit. The premier populations are responsible for finding the optimum solution while the other candidates are required to maintain the hierarchy, provide valuable input to the leaders, and contest when the results begin deteriorating. When the top popultion does not function as per requirement, the population next-in-line succeeds it. A memory component is introduced in the form of a memoization table that maps the previously encountered inputs to their corresponding outputs. 
+
+
+\begin{thebibliography}{00}
+\bibitem{chankong} Chankong V., Haimes Y, Thadathil J., Zionts S. (1985), Multiple Criteria Optimization: A State of the Art Review, Decision Making with Multiple Objectives, Lecture Notes in Economics and Mathematical Systems 242, Edited by Y.Y. Haimes, V. Chankong, SpringerVerlag, 36.
+
+\bibitem{liu} H. Liu, F. Gu and Q. Zhang, "Decomposition of a Multiobjective Optimization Problem Into a Number of Simple Multiobjective Subproblems," in IEEE Transactions on Evolutionary Computation, vol. 18, no. 3, pp. 450-455, June 2014, doi: 10.1109/TEVC.2013.2281533. 
+
+\bibitem{Deb} K. Deb, K. Miettinen and S. Chaudhuri, "Toward an Estimation of Nadir Objective Vector Using a Hybrid of Evolutionary and Local Search Approaches," in IEEE Transactions on Evolutionary Computation, vol. 14, no. 6, pp. 821-841, Dec. 2010, doi: 10.1109/TEVC.2010.2041667.
+
+\bibitem{arora} Marler, R.T., Arora, J.S. The weighted sum method for multi-objective optimization: new insights. Struct Multidisc Optim 41, 853–862 (2010). https://doi.org/10.1007/s00158-009-0460-7
+
+\bibitem{cooper} K. Cooper, S. R. Hunter and K. Nagaraj, "An epsilon-constraint method for integer-ordered bi-objective simulation optimization," 2017 Winter Simulation Conference (WSC), Las Vegas, NV, 2017, pp. 2303-2314, doi: 10.1109/WSC.2017.8247961.
+
+\bibitem{ryu} N. Ryu, W. S. Song, Y. Jung and S. Min, "Multi-Objective Topology Optimization of a Magnetic Actuator Using an Adaptive Weight and Tunneling Method," in IEEE Transactions on Magnetics, vol. 55, no. 6, pp. 1-4, June 2019, Art no. 7202504, doi: 10.1109/TMAG.2019.2899893.
+
+\bibitem{sinha} A. Sinha, K. Deb, P. Korhonen and J. Wallenius, "Progressively interactive evolutionary multi-objective optimization method using generalized polynomial value functions," IEEE Congress on Evolutionary Computation, Barcelona, 2010, pp. 1-8, doi: 10.1109/CEC.2010.5586278.
+
+\bibitem{kim} J. Kim, J. Han, Y. Kim, S. Choi and E. Kim, "Preference-Based Solution Selection Algorithm for Evolutionary Multiobjective Optimization," in IEEE Transactions on Evolutionary Computation, vol. 16, no. 1, pp. 20-34, Feb. 2012, doi: 10.1109/TEVC.2010.2098412.
+
+\bibitem{an} S. An, S. Yang and Z. Ren, "Incorporating Light Beam Search in a Vector Normal Boundary Intersection Method for Linear Antenna Array Optimization," in IEEE Transactions on Magnetics, vol. 53, no. 6, pp. 1-4, June 2017, Art no. 7001304, doi: 10.1109/TMAG.2017.2664077.
+
+\bibitem{lim} P. Limbourg and D. E. S. Aponte, "An optimization algorithm for imprecise multi-objective problem functions," 2005 IEEE Congress on Evolutionary Computation, Edinburgh, Scotland, 2005, pp. 459-466 Vol.1, doi: 10.1109/CEC.2005.1554719.
+
+\bibitem{conv} G. Rudolph and A. Agapie, "Convergence properties of some multi-objective evolutionary algorithms," Proceedings of the 2000 Congress on Evolutionary Computation. CEC00 (Cat. No.00TH8512), La Jolla, CA, USA, 2000, pp. 1010-1016 vol.2, doi: 10.1109/CEC.2000.870756.
+
+\bibitem{arnold} D. V. Arnold and R. Salomon, "Evolutionary Gradient Search Revisited," in IEEE Transactions on Evolutionary Computation, vol. 11, no. 4, pp. 480-495, Aug. 2007, doi: 10.1109/TEVC.2006.882427.
+
+\bibitem{vikhar} P. A. Vikhar, "Evolutionary algorithms: A critical review and its future prospects," 2016 International Conference on Global Trends in Signal Processing, Information Computing and Communication (ICGTSPICC), Jalgaon, 2016, pp. 261-265, doi: 10.1109/ICGTSPICC.2016.7955308.
+
+\bibitem{swarm} Yan-fei Zhu and Xiong-min Tang, "Overview of swarm intelligence," 2010 International Conference on Computer Application and System Modeling (ICCASM 2010), Taiyuan, 2010, pp. V9-400-V9-403, doi: 10.1109/ICCASM.2010.5623005.
+
+\bibitem{man} K. F. Man, K. S. Tang and S. Kwong, "Genetic algorithms: concepts and applications [in engineering design]," in IEEE Transactions on Industrial Electronics, vol. 43, no. 5, pp. 519-534, Oct. 1996, doi: 10.1109/41.538609.
+
+\bibitem{abdul} W. Abdulal, O. A. Jadaan, A. Jabas, S. Ramachandram, M. Kaiiali and C. R. Rao, "Rank-Based Genetic Algorithm with Limited Iteration for Grid Scheduling," 2009 First ICCICSN, Indore, 2009, pp. 29-34, doi: 10.1109/CICSYN.2009.23.
+
+\bibitem{kita} M. Takahashi and H. Kita, "A crossover operator using independent component analysis for real-coded genetic algorithms," Proceedings of the 2001 Congress on Evolutionary Computation (IEEE Cat. No.01TH8546), Seoul, South Korea, 2001, pp. 643-649 vol. 1, doi: 10.1109/CEC.2001.934452.
+
+\bibitem{im} X. Deng, "Application of Adaptive Genetic Algorithm in Inversion Analysis of Permeability Coefficients," 2008 Second International Conference on Genetic and Evolutionary Computing, Hubei, 2008, pp. 61-65, doi: 10.1109/WGEC.2008.63.
+
+\bibitem{pso} J. Kennedy and R. Eberhart, "Particle swarm optimization," Proceedings of ICNN'95 - International Conference on Neural Networks, Perth, WA, Australia, 1995, pp. 1942-1948 vol.4, doi: 10.1109/ICNN.1995.488968.
+
+\bibitem{gwo} D. Jitkongchuen, P. Phaidang and P. Pongtawevirat, "Grey wolf optimization algorithm with invasion-based migration operation," 2016 IEEE/ACIS 15th International Conference on Computer and Information Science (ICIS), Okayama, 2016, pp. 1-5, doi: 10.1109/ICIS.2016.7550769.
+
+\bibitem{mvo} H. Jia, X. Peng, W. Song, C. Lang, Z. Xing and K. Sun, "Multiverse Optimization Algorithm Based on Lévy Flight Improvement for Multithreshold Color Image Segmentation," in IEEE Access, vol. 7, pp. 32805-32844, 2019, doi: 10.1109/ACCESS.2019.2903345.
+
+\bibitem{cs} M. Naik, M. R. Nath, A. Wunnava, S. Sahany and R. Panda, "A new adaptive Cuckoo search algorithm," 2015 IEEE 2nd International Conference on Recent Trends in Information Systems (ReTIS), Kolkata, 2015, pp. 1-5, doi: 10.1109/ReTIS.2015.7232842.
+
+\bibitem{bf} R. W. Garden and A. P. Engelbrecht, "Analysis and classification of optimisation benchmark functions and benchmark suites," 2014 IEEE Congress on Evolutionary Computation (CEC), Beijing, 2014, pp. 1641-1649, doi: 10.1109/CEC.2014.6900240.
+
+\end{thebibliography}
+
+
+\end{document}
